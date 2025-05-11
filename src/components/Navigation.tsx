@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X } from 'lucide-react';
+import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
   const location = useLocation();
@@ -88,38 +89,52 @@ const Navigation = () => {
           Spring Book Club
         </Link>
         
-        <div className="relative">
-          {isMobile ? (
-            isSearchActive ? (
-              <div className="absolute right-0 top-0 flex items-center">
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
+            asChild
+          >
+            <Link to="/signup">
+              <UserPlus className="h-4 w-4 mr-1" />
+              Sign Up
+            </Link>
+          </Button>
+          
+          <div className="relative">
+            {isMobile ? (
+              isSearchActive ? (
+                <div className="absolute right-0 top-0 flex items-center">
+                  <input 
+                    type="text" 
+                    placeholder="Search" 
+                    className="pl-2 pr-8 py-1 bg-transparent border-b border-bookish-maroon/50 focus:outline-none focus:border-bookish-maroon text-sm w-full" 
+                    autoFocus
+                    onBlur={() => setIsSearchActive(false)}
+                  />
+                  <X 
+                    className="absolute right-2 h-4 w-4 text-bookish-maroon/70 cursor-pointer" 
+                    onClick={() => setIsSearchActive(false)}
+                  />
+                </div>
+              ) : (
+                <Search 
+                  className="h-5 w-5 text-bookish-maroon/70 cursor-pointer" 
+                  onClick={() => setIsSearchActive(true)}
+                />
+              )
+            ) : (
+              <div className="relative">
                 <input 
                   type="text" 
                   placeholder="Search" 
-                  className="pl-2 pr-8 py-1 bg-transparent border-b border-bookish-maroon/50 focus:outline-none focus:border-bookish-maroon text-sm w-full" 
-                  autoFocus
-                  onBlur={() => setIsSearchActive(false)}
+                  className="pl-2 pr-8 py-1 bg-transparent border-b border-bookish-maroon/50 focus:outline-none focus:border-bookish-maroon text-sm" 
                 />
-                <X 
-                  className="absolute right-2 h-4 w-4 text-bookish-maroon/70 cursor-pointer" 
-                  onClick={() => setIsSearchActive(false)}
-                />
+                <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 h-4 w-4 text-bookish-maroon/70" />
               </div>
-            ) : (
-              <Search 
-                className="h-5 w-5 text-bookish-maroon/70 cursor-pointer" 
-                onClick={() => setIsSearchActive(true)}
-              />
-            )
-          ) : (
-            <div className="relative">
-              <input 
-                type="text" 
-                placeholder="Search" 
-                className="pl-2 pr-8 py-1 bg-transparent border-b border-bookish-maroon/50 focus:outline-none focus:border-bookish-maroon text-sm" 
-              />
-              <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 h-4 w-4 text-bookish-maroon/70" />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       
@@ -127,6 +142,21 @@ const Navigation = () => {
         <nav className="flex justify-center items-center border-b border-bookish-maroon/30">
           <NavLinks />
         </nav>
+      )}
+      
+      {/* Mobile sign up button */}
+      {isMobile && (
+        <div className="fixed bottom-4 right-4 z-10">
+          <Button 
+            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+            asChild
+          >
+            <Link to="/signup">
+              <UserPlus className="h-4 w-4 mr-1" />
+              Sign Up
+            </Link>
+          </Button>
+        </div>
       )}
     </>
   );
