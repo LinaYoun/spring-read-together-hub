@@ -1,13 +1,15 @@
 
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn, LayoutDashboard } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn, LayoutDashboard, LogOut } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [isSearchActive, setIsSearchActive] = useState(false);
   
@@ -49,6 +51,17 @@ const Navigation = () => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
+  };
+
+  const handleLogout = () => {
+    // Clear any stored user data/session
+    localStorage.removeItem('user');
+    
+    // Show toast message
+    toast.success("Logged out successfully");
+    
+    // Navigate to home page
+    navigate('/');
   };
 
   const NavLinks = () => (
@@ -118,6 +131,16 @@ const Navigation = () => {
             </Link>
           </Button>
           
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-4 w-4 mr-1" />
+            Logout
+          </Button>
+          
           <div className="relative">
             {isMobile ? (
               isSearchActive ? (
@@ -160,7 +183,7 @@ const Navigation = () => {
         </nav>
       )}
       
-      {/* Mobile login and signup buttons */}
+      {/* Mobile login, signup and logout buttons */}
       {isMobile && (
         <div className="fixed bottom-4 right-4 z-10 flex flex-col gap-2">
           <Button 
@@ -180,6 +203,13 @@ const Navigation = () => {
               <UserPlus className="h-4 w-4 mr-1" />
               Sign Up
             </Link>
+          </Button>
+          <Button 
+            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-4 w-4 mr-1" />
+            Logout
           </Button>
         </div>
       )}
