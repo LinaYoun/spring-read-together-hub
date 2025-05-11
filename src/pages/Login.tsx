@@ -20,13 +20,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
-// 로그인 폼 스키마 정의
+// Define login form schema
 const loginFormSchema = z.object({
   email: z.string().email({
-    message: "유효한 이메일 주소를 입력해주세요.",
+    message: "Please enter a valid email address.",
   }),
   password: z.string().min(1, {
-    message: "비밀번호를 입력해주세요.",
+    message: "Please enter your password.",
   }),
 });
 
@@ -43,15 +43,15 @@ const Login = () => {
   });
 
   const onSubmit = (values: LoginFormValues) => {
-    // 여기에서 백엔드에 로그인 요청을 보내게 됩니다
+    // Here we would send a login request to the backend
     console.log(values);
     
-    // 성공 메시지 표시
-    toast.success("로그인 성공!", {
-      description: "Spring Book Club에 오신 것을 환영합니다!",
+    // Show success message
+    toast.success("Login successful!", {
+      description: "Welcome to Spring Book Club!",
     });
     
-    // 로그인 성공 후 홈페이지로 리디렉션
+    // Redirect to homepage after successful login
     setTimeout(() => {
       navigate('/');
     }, 1000);
@@ -62,9 +62,9 @@ const Login = () => {
       <div className="container max-w-md mx-auto py-8">
         <Card className="border border-bookish-maroon/20">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl font-serif text-bookish-maroon">로그인</CardTitle>
+            <CardTitle className="text-2xl font-serif text-bookish-maroon">Login</CardTitle>
             <CardDescription>
-              Spring Book Club에 로그인하세요
+              Sign in to Spring Book Club
             </CardDescription>
           </CardHeader>
           
@@ -76,7 +76,7 @@ const Login = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>이메일</FormLabel>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Mail className="absolute left-3 top-3 h-4 w-4 text-bookish-maroon/70" />
@@ -98,12 +98,12 @@ const Login = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>비밀번호</FormLabel>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Lock className="absolute left-3 top-3 h-4 w-4 text-bookish-maroon/70" />
                           <Input 
-                            placeholder="비밀번호 입력" 
+                            placeholder="Enter password" 
                             className="pl-10"
                             type="password" 
                             {...field} 
@@ -117,7 +117,7 @@ const Login = () => {
                 
                 <div className="flex justify-end">
                   <Link to="/forgot-password" className="text-sm text-bookish-maroon hover:underline">
-                    비밀번호를 잊으셨나요?
+                    Forgot your password?
                   </Link>
                 </div>
                 
@@ -125,7 +125,7 @@ const Login = () => {
                   type="submit" 
                   className="w-full bg-bookish-maroon hover:bg-bookish-dark"
                 >
-                  로그인
+                  Login
                 </Button>
               </form>
             </Form>
@@ -133,9 +133,9 @@ const Login = () => {
           
           <CardFooter className="flex flex-col space-y-2">
             <div className="text-sm text-center">
-              계정이 없으신가요?{" "}
+              Don't have an account?{" "}
               <Link to="/signup" className="text-bookish-maroon hover:underline">
-                회원가입
+                Sign up
               </Link>
             </div>
           </CardFooter>
