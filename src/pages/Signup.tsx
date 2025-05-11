@@ -23,6 +23,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 // Define our signup form schema
 const signupFormSchema = z.object({
+  username: z.string().min(3, {
+    message: "Username must be at least 3 characters.",
+  }),
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -48,6 +51,7 @@ const Signup = () => {
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
+      username: "",
       name: "",
       email: "",
       password: "",
@@ -85,6 +89,27 @@ const Signup = () => {
           <CardContent>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <User className="absolute left-3 top-3 h-4 w-4 text-bookish-maroon/70" />
+                          <Input 
+                            placeholder="Choose a username" 
+                            className="pl-10" 
+                            {...field} 
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
                 <FormField
                   control={form.control}
                   name="name"

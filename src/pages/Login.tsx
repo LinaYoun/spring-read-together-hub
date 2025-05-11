@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Mail, Lock } from 'lucide-react';
+import { User, Lock } from 'lucide-react';
 
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -22,8 +22,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 // Define login form schema
 const loginFormSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
+  username: z.string().min(1, {
+    message: "Please enter your username.",
   }),
   password: z.string().min(1, {
     message: "Please enter your password.",
@@ -37,7 +37,7 @@ const Login = () => {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -73,17 +73,16 @@ const Login = () => {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>Username</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-bookish-maroon/70" />
+                          <User className="absolute left-3 top-3 h-4 w-4 text-bookish-maroon/70" />
                           <Input 
-                            placeholder="email@example.com" 
+                            placeholder="Enter your username" 
                             className="pl-10"
-                            type="email" 
                             {...field} 
                           />
                         </div>
