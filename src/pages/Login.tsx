@@ -32,6 +32,15 @@ const loginFormSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
+// Mock user data - in a real app, this would come from your API/backend
+const mockUsers = [
+  { username: 'janesmith', status: 'pending' },
+  { username: 'markjohnson', status: 'pending' },
+  { username: 'saraconnor', status: 'pending' },
+  { username: 'robertkim', status: 'approved' },
+  { username: 'emilywong', status: 'rejected' },
+];
+
 const Login = () => {
   const navigate = useNavigate();
   const form = useForm<LoginFormValues>({
@@ -43,18 +52,38 @@ const Login = () => {
   });
 
   const onSubmit = (values: LoginFormValues) => {
-    // Here we would send a login request to the backend
-    console.log(values);
+    // Mock login verification
+    const user = mockUsers.find(u => u.username === values.username);
     
-    // Show success message
-    toast.success("Login successful!", {
-      description: "Welcome to Spring Book Club!",
-    });
-    
-    // Redirect to homepage after successful login
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
+    // Check if user exists and is approved
+    if (user) {
+      if (user.status === 'approved') {
+        // Show success message for approved users
+        toast.success("Login successful!", {
+          description: "Welcome to Spring Book Club!",
+        });
+        
+        // Redirect to homepage after successful login
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
+      } else if (user.status === 'pending') {
+        // Show pending message
+        toast.error("Account pending approval", {
+          description: "Your account is awaiting administrator approval.",
+        });
+      } else {
+        // Show rejection message
+        toast.error("Account access denied", {
+          description: "Your registration request has been rejected.",
+        });
+      }
+    } else {
+      // User not found
+      toast.error("Login failed", {
+        description: "Invalid username or password",
+      });
+    }
   };
 
   return (

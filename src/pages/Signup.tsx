@@ -62,16 +62,19 @@ const Signup = () => {
 
   const onSubmit = (values: SignupFormValues) => {
     // Here you would typically send this data to your backend
-    console.log(values);
+    console.log({
+      ...values,
+      status: 'pending' // Set default status to pending
+    });
     
     // Show success message
-    toast.success("Account created successfully!", {
-      description: "Welcome to Spring Book Club!",
+    toast.success("Registration request submitted!", {
+      description: "Your account will be active after admin approval.",
     });
     
     // Redirect to login page after successful signup
     setTimeout(() => {
-      navigate('/'); // Change this to '/login' when you have a login page
+      navigate('/'); 
     }, 2000);
   };
 
