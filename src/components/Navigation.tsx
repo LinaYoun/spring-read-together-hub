@@ -98,7 +98,7 @@ const Navigation = () => {
           >
             <Link to="/login">
               <LogIn className="h-4 w-4 mr-1" />
-              로그인
+              Login
             </Link>
           </Button>
           
@@ -110,7 +110,7 @@ const Navigation = () => {
           >
             <Link to="/signup">
               <UserPlus className="h-4 w-4 mr-1" />
-              회원가입
+              Sign Up
             </Link>
           </Button>
           
@@ -156,7 +156,7 @@ const Navigation = () => {
         </nav>
       )}
       
-      {/* 모바일 로그인 및 회원가입 버튼 */}
+      {/* Mobile login and signup buttons */}
       {isMobile && (
         <div className="fixed bottom-4 right-4 z-10 flex flex-col gap-2">
           <Button 
@@ -165,7 +165,7 @@ const Navigation = () => {
           >
             <Link to="/login">
               <LogIn className="h-4 w-4 mr-1" />
-              로그인
+              Login
             </Link>
           </Button>
           <Button 
@@ -174,7 +174,7 @@ const Navigation = () => {
           >
             <Link to="/signup">
               <UserPlus className="h-4 w-4 mr-1" />
-              회원가입
+              Sign Up
             </Link>
           </Button>
         </div>
