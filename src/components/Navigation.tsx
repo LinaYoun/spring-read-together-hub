@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn, LayoutDashboard, LogOut } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -12,6 +12,13 @@ const Navigation = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  // Check if user is logged in when component mounts
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    setIsLoggedIn(!!user);
+  }, []);
   
   const navItems = [{
     title: "Home",
@@ -56,6 +63,9 @@ const Navigation = () => {
   const handleLogout = () => {
     // Clear any stored user data/session
     localStorage.removeItem('user');
+    
+    // Update login state
+    setIsLoggedIn(false);
     
     // Show toast message
     toast.success("Logged out successfully");
@@ -107,39 +117,43 @@ const Navigation = () => {
         </Link>
         
         <div className="flex items-center gap-2">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
-            asChild
-          >
-            <Link to="/login">
-              <LogIn className="h-4 w-4 mr-1" />
-              Login
-            </Link>
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
-            asChild
-          >
-            <Link to="/signup">
-              <UserPlus className="h-4 w-4 mr-1" />
-              Sign Up
-            </Link>
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10"
-            onClick={handleLogout}
-          >
-            <LogOut className="h-4 w-4 mr-1" />
-            Logout
-          </Button>
+          {!isLoggedIn ? (
+            <>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
+                asChild
+              >
+                <Link to="/login">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  Login
+                </Link>
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
+                asChild
+              >
+                <Link to="/signup">
+                  <UserPlus className="h-4 w-4 mr-1" />
+                  Sign Up
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10"
+              onClick={handleLogout}
+            >
+              <LogOut className="h-4 w-4 mr-1" />
+              Logout
+            </Button>
+          )}
           
           <div className="relative">
             {isMobile ? (
@@ -186,31 +200,36 @@ const Navigation = () => {
       {/* Mobile login, signup and logout buttons */}
       {isMobile && (
         <div className="fixed bottom-4 right-4 z-10 flex flex-col gap-2">
-          <Button 
-            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
-            asChild
-          >
-            <Link to="/login">
-              <LogIn className="h-4 w-4 mr-1" />
-              Login
-            </Link>
-          </Button>
-          <Button 
-            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
-            asChild
-          >
-            <Link to="/signup">
-              <UserPlus className="h-4 w-4 mr-1" />
-              Sign Up
-            </Link>
-          </Button>
-          <Button 
-            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
-            onClick={handleLogout}
-          >
-            <LogOut className="h-4 w-4 mr-1" />
-            Logout
-          </Button>
+          {!isLoggedIn ? (
+            <>
+              <Button 
+                className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+                asChild
+              >
+                <Link to="/login">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  Login
+                </Link>
+              </Button>
+              <Button 
+                className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+                asChild
+              >
+                <Link to="/signup">
+                  <UserPlus className="h-4 w-4 mr-1" />
+                  Sign Up
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <Button 
+              className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+              onClick={handleLogout}
+            >
+              <LogOut className="h-4 w-4 mr-1" />
+              Logout
+            </Button>
+          )}
         </div>
       )}
     </>

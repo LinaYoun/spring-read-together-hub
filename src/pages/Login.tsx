@@ -58,6 +58,9 @@ const Login = () => {
   const onSubmit = (values: LoginFormValues) => {
     // Check for admin credentials first
     if (values.username === 'admin' && values.password === 'admin') {
+      // Store user info in localStorage
+      localStorage.setItem('user', JSON.stringify({ username: values.username, role: 'admin' }));
+      
       toast.success("Admin login successful!", {
         description: "Welcome to Admin Dashboard",
       });
@@ -75,6 +78,12 @@ const Login = () => {
     // Check if user exists and is approved
     if (user) {
       if (user.status === 'approved') {
+        // Store user info in localStorage for approved users
+        localStorage.setItem('user', JSON.stringify({ 
+          username: values.username, 
+          memberType: user.memberType 
+        }));
+        
         // Show success message for approved users
         toast.success("Login successful!", {
           description: `Welcome to Spring Book Club as a ${user.memberType}!`,
