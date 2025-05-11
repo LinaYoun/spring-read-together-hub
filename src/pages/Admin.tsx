@@ -17,18 +17,10 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-// Mock data for pending users
-// In a real app, this would come from your backend
-const initialUsers = [
-  { id: 1, username: 'janesmith', name: 'Jane Smith', email: 'jane@example.com', registeredAt: '2025-05-10', status: 'pending' },
-  { id: 2, username: 'markjohnson', name: 'Mark Johnson', email: 'mark@example.com', registeredAt: '2025-05-09', status: 'pending' },
-  { id: 3, username: 'saraconnor', name: 'Sara Connor', email: 'sara@example.com', registeredAt: '2025-05-08', status: 'pending' },
-  { id: 4, username: 'robertkim', name: 'Robert Kim', email: 'robert@example.com', registeredAt: '2025-05-07', status: 'approved' },
-  { id: 5, username: 'emilywong', name: 'Emily Wong', email: 'emily@example.com', registeredAt: '2025-05-06', status: 'rejected' },
-];
-
+// Define UserStatus type to match the expected type in our application
 type UserStatus = 'pending' | 'approved' | 'rejected';
 
+// Define User interface
 interface User {
   id: number;
   username: string;
@@ -37,6 +29,16 @@ interface User {
   registeredAt: string;
   status: UserStatus;
 }
+
+// Mock data for pending users
+// In a real app, this would come from your backend
+const initialUsers: User[] = [
+  { id: 1, username: 'janesmith', name: 'Jane Smith', email: 'jane@example.com', registeredAt: '2025-05-10', status: 'pending' },
+  { id: 2, username: 'markjohnson', name: 'Mark Johnson', email: 'mark@example.com', registeredAt: '2025-05-09', status: 'pending' },
+  { id: 3, username: 'saraconnor', name: 'Sara Connor', email: 'sara@example.com', registeredAt: '2025-05-08', status: 'pending' },
+  { id: 4, username: 'robertkim', name: 'Robert Kim', email: 'robert@example.com', registeredAt: '2025-05-07', status: 'approved' },
+  { id: 5, username: 'emilywong', name: 'Emily Wong', email: 'emily@example.com', registeredAt: '2025-05-06', status: 'rejected' },
+];
 
 const Admin = () => {
   const [users, setUsers] = useState<User[]>(initialUsers);

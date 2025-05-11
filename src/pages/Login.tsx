@@ -32,8 +32,11 @@ const loginFormSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
-// Mock user data - in a real app, this would come from your API/backend
-const mockUsers = [
+// Define UserStatus type to match the Admin.tsx file
+type UserStatus = 'pending' | 'approved' | 'rejected';
+
+// Mock user data with properly typed status - in a real app, this would come from your API/backend
+const mockUsers: { username: string; status: UserStatus }[] = [
   { username: 'janesmith', status: 'pending' },
   { username: 'markjohnson', status: 'pending' },
   { username: 'saraconnor', status: 'pending' },
