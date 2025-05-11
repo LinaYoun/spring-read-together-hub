@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const Hero = () => {
   return (
@@ -10,9 +9,12 @@ const Hero = () => {
       <div className="flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 relative">
           <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto md:mx-0 overflow-hidden border-4 border-bookish-maroon rounded-full">
-            <AspectRatio ratio={1/1} className="h-full">
-              <div className="absolute inset-0 bg-[url('/lovable-uploads/e632e0fe-e845-424a-be51-49548368bec5.png')] bg-center bg-cover"></div>
-            </AspectRatio>
+            <div className="absolute inset-0 bg-[url('/lovable-uploads/45fd22c8-cecc-44a0-99de-48ba9818349f.png')] bg-center bg-cover opacity-50" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="animate-page-turn">
+                <img src="/placeholder.svg" alt="Open Book" className="w-32 h-32 opacity-90" />
+              </span>
+            </div>
           </div>
           <div className="absolute -top-2 left-1/2 md:left-1/3 transform -translate-x-1/2 w-full">
             <div className="border-2 border-bookish-maroon w-40 mx-auto" style={{
