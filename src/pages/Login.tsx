@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { MemberType } from './Signup';
 
 // Define login form schema
 const loginFormSchema = z.object({
@@ -36,12 +37,12 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 type UserStatus = 'pending' | 'approved' | 'rejected';
 
 // Mock user data with properly typed status - in a real app, this would come from your API/backend
-const mockUsers: { username: string; status: UserStatus }[] = [
-  { username: 'janesmith', status: 'pending' },
-  { username: 'markjohnson', status: 'pending' },
-  { username: 'saraconnor', status: 'pending' },
-  { username: 'robertkim', status: 'approved' },
-  { username: 'emilywong', status: 'rejected' },
+const mockUsers: { username: string; status: UserStatus; memberType: MemberType }[] = [
+  { username: 'janesmith', status: 'pending', memberType: 'Member' },
+  { username: 'markjohnson', status: 'pending', memberType: 'Member' },
+  { username: 'saraconnor', status: 'pending', memberType: 'Librarian' },
+  { username: 'robertkim', status: 'approved', memberType: 'Member' },
+  { username: 'emilywong', status: 'rejected', memberType: 'Librarian' },
 ];
 
 const Login = () => {
@@ -76,7 +77,7 @@ const Login = () => {
       if (user.status === 'approved') {
         // Show success message for approved users
         toast.success("Login successful!", {
-          description: "Welcome to Spring Book Club!",
+          description: `Welcome to Spring Book Club as a ${user.memberType}!`,
         });
         
         // Redirect to homepage after successful login

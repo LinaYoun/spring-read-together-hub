@@ -20,6 +20,20 @@ import {
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from '@/components/ui/radio-group';
+
+// Define the member types
+export type MemberType = 'Member' | 'Librarian';
 
 // Define our signup form schema
 const signupFormSchema = z.object({
@@ -36,6 +50,9 @@ const signupFormSchema = z.object({
     message: "Password must be at least 8 characters.",
   }),
   confirmPassword: z.string(),
+  memberType: z.enum(['Member', 'Librarian'], {
+    required_error: "Please select a member type.",
+  }),
   agreeTerms: z.boolean().refine(val => val === true, {
     message: "You must agree to our terms and conditions.",
   }),
@@ -56,6 +73,7 @@ const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      memberType: "Member",
       agreeTerms: false,
     },
   });
@@ -150,6 +168,37 @@ const Signup = () => {
                             {...field} 
                           />
                         </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="memberType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Member Type</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="Member" id="member" />
+                            <FormLabel htmlFor="member" className="font-normal cursor-pointer">
+                              Member
+                            </FormLabel>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="Librarian" id="librarian" />
+                            <FormLabel htmlFor="librarian" className="font-normal cursor-pointer">
+                              Librarian
+                            </FormLabel>
+                          </div>
+                        </RadioGroup>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
