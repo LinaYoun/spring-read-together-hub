@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus } from 'lucide-react';
+import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
@@ -96,9 +96,21 @@ const Navigation = () => {
             className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
             asChild
           >
+            <Link to="/login">
+              <LogIn className="h-4 w-4 mr-1" />
+              로그인
+            </Link>
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hidden sm:flex items-center text-bookish-maroon hover:bg-bookish-maroon/10" 
+            asChild
+          >
             <Link to="/signup">
               <UserPlus className="h-4 w-4 mr-1" />
-              Sign Up
+              회원가입
             </Link>
           </Button>
           
@@ -144,16 +156,25 @@ const Navigation = () => {
         </nav>
       )}
       
-      {/* Mobile sign up button */}
+      {/* 모바일 로그인 및 회원가입 버튼 */}
       {isMobile && (
-        <div className="fixed bottom-4 right-4 z-10">
+        <div className="fixed bottom-4 right-4 z-10 flex flex-col gap-2">
+          <Button 
+            className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
+            asChild
+          >
+            <Link to="/login">
+              <LogIn className="h-4 w-4 mr-1" />
+              로그인
+            </Link>
+          </Button>
           <Button 
             className="bg-bookish-maroon hover:bg-bookish-dark shadow-lg rounded-full"
             asChild
           >
             <Link to="/signup">
               <UserPlus className="h-4 w-4 mr-1" />
-              Sign Up
+              회원가입
             </Link>
           </Button>
         </div>
