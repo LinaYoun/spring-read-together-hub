@@ -55,7 +55,20 @@ const Login = () => {
   });
 
   const onSubmit = (values: LoginFormValues) => {
-    // Mock login verification
+    // Check for admin credentials first
+    if (values.username === 'admin' && values.password === 'admin') {
+      toast.success("Admin login successful!", {
+        description: "Welcome to Admin Dashboard",
+      });
+      
+      // Redirect to admin page
+      setTimeout(() => {
+        navigate('/admin');
+      }, 1000);
+      return;
+    }
+    
+    // Mock login verification for regular users
     const user = mockUsers.find(u => u.username === values.username);
     
     // Check if user exists and is approved
