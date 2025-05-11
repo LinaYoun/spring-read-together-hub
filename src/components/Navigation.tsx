@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn } from 'lucide-react';
+import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users, Menu, X, UserPlus, LogIn, LayoutDashboard } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
@@ -39,6 +39,10 @@ const Navigation = () => {
     title: "Contact",
     path: "/contact",
     icon: Mail
+  }, {
+    title: "Admin",
+    path: "/admin",
+    icon: LayoutDashboard
   }];
 
   const isActive = (path: string) => {
