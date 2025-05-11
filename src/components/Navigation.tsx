@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail, Search, Home, BookOpen, ShoppingBag, Briefcase, FileText, Archive } from 'lucide-react';
+import { Mail, Search, Home, BookOpen, FileText, Archive, Calendar, Users } from 'lucide-react';
+
 const Navigation = () => {
   const location = useLocation();
   const navItems = [{
@@ -8,31 +10,37 @@ const Navigation = () => {
     path: "/",
     icon: Home
   }, {
-    title: "Shop",
-    path: "/shop",
-    icon: ShoppingBag
+    title: "About Us",
+    path: "/about",
+    icon: FileText
   }, {
     title: "Book Club",
     path: "/book-club",
     icon: BookOpen
   }, {
-    title: "Workshop",
-    path: "/workshop",
-    icon: Briefcase
-  }, {
-    title: "About",
-    path: "/about",
-    icon: FileText
-  }, {
-    title: "Archive",
+    title: "Resources",
     path: "/archive",
     icon: Archive
+  }, {
+    title: "Calendar",
+    path: "/calendar",
+    icon: Calendar
+  }, {
+    title: "Community",
+    path: "/community",
+    icon: Users
+  }, {
+    title: "Contact",
+    path: "/contact",
+    icon: Mail
   }];
+
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
+
   return <>
       <div className="flex justify-between items-center py-4 px-6 border-b border-bookish-maroon/30">
         <Link to="/" className="flex items-center space-x-2">
@@ -58,4 +66,5 @@ const Navigation = () => {
       </nav>
     </>;
 };
+
 export default Navigation;

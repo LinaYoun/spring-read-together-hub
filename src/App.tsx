@@ -10,6 +10,9 @@ import BookClub from "./pages/BookClub";
 import Shop from "./pages/Shop";
 import Workshop from "./pages/Workshop";
 import Archive from "./pages/Archive";
+import Calendar from "./pages/Calendar";
+import Community from "./pages/Community";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +30,9 @@ const App = () => (
           <Route path="/shop" element={<Shop />} />
           <Route path="/workshop" element={<Workshop />} />
           <Route path="/archive" element={<Archive />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
