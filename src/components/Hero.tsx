@@ -1,0 +1,50 @@
+
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+
+const Hero = () => {
+  return (
+    <div className="relative overflow-hidden mb-16">
+      <div className="flex flex-col md:flex-row items-center">
+        <div className="md:w-1/2 relative">
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto md:mx-0 overflow-hidden border-4 border-bookish-maroon rounded-full">
+            <div className="absolute inset-0 bg-[url('/lovable-uploads/45fd22c8-cecc-44a0-99de-48ba9818349f.png')] bg-center bg-cover opacity-50" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="animate-page-turn">
+                <img src="/placeholder.svg" alt="Open Book" className="w-32 h-32 opacity-90" />
+              </span>
+            </div>
+          </div>
+          <div className="absolute -top-2 left-1/2 md:left-1/3 transform -translate-x-1/2 w-full">
+            <div className="border-2 border-bookish-maroon w-40 mx-auto" style={{
+              borderBottom: 'none',
+              borderLeft: 'none',
+              borderRight: 'none',
+            }}></div>
+          </div>
+          <div className="absolute -bottom-2 left-1/2 md:left-1/3 transform -translate-x-1/2 w-full">
+            <div className="border-2 border-bookish-maroon w-40 mx-auto" style={{
+              borderTop: 'none',
+              borderLeft: 'none',
+              borderRight: 'none',
+            }}></div>
+          </div>
+        </div>
+        <div className="md:w-1/2 pt-8 md:pt-0 text-center md:text-left">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif italic mb-6 text-bookish-maroon">
+            Just One<br />More Page...
+          </h1>
+          <p className="text-bookish-dark mb-6 max-w-xl">
+            Spring Book Club is a community of passionate readers who gather to discuss English books and literature. Join us for reading sessions, workshops, and lively discussions in a cozy atmosphere.
+          </p>
+          <Button className="bg-bookish-maroon hover:bg-bookish-dark text-bookish-cream">
+            Join our Community <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
